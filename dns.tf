@@ -69,19 +69,19 @@ resource "digitalocean_record" "thom_is_www_cname" {
 resource "digitalocean_record" "thom_is_mx_1" {
   domain   = digitalocean_domain.thom_is.name
   name     = "@"
-  priority = 1
+  priority = 10
   ttl      = 3600
   type     = "MX"
-  value    = "aspmx.l.google.com."
+  value    = "mx01.mail.icloud.com."
 }
 
 resource "digitalocean_record" "thom_is_mx_2" {
   domain   = digitalocean_domain.thom_is.name
   name     = "@"
-  priority = 5
+  priority = 10
   ttl      = 3600
   type     = "MX"
-  value    = "alt1.aspmx.l.google.com."
+  value    = "mx02.mail.icloud.com."
 }
 
 resource "digitalocean_record" "thom_is_mx_3" {
@@ -93,30 +93,28 @@ resource "digitalocean_record" "thom_is_mx_3" {
   value    = "alt2.aspmx.l.google.com."
 }
 
-resource "digitalocean_record" "thom_is_mx_4" {
-  domain   = digitalocean_domain.thom_is.name
-  name     = "@"
-  priority = 10
-  ttl      = 3600
-  type     = "MX"
-  value    = "alt3.aspmx.l.google.com."
-}
-
-resource "digitalocean_record" "thom_is_mx_5" {
-  domain   = digitalocean_domain.thom_is.name
-  name     = "@"
-  priority = 10
-  ttl      = 3600
-  type     = "MX"
-  value    = "alt4.aspmx.l.google.com."
-}
-
-resource "digitalocean_record" "thom_is_spf" {
+resource "digitalocean_record" "thom_is_apple_domain" {
   domain   = digitalocean_domain.thom_is.name
   name     = "@"
   ttl      = 3600
   type     = "TXT"
-  value    = "v=spf1 a include:_spf.google.com ~all"
+  value    = "apple-domain=45jwPYhqvdZH07OY"
+}
+
+resource "digitalocean_record" "thom_is_icloud_spf" {
+  domain   = digitalocean_domain.thom_is.name
+  name     = "@"
+  ttl      = 3600
+  type     = "TXT"
+  value    = ""v=spf1 include:icloud.com ~all""
+}
+
+resource "digitalocean_record" "thom_is_icloud_dkim" {
+  domain   = digitalocean_domain.thom_is.name
+  name     = "sig1._domainkey"
+  ttl      = 60
+  type     = "CNAME"
+  value    = "sig1.dkim.thom.is.at.icloudmailadmin.com."
 }
 
 resource "digitalocean_record" "thom_is_keybase_verification" {
@@ -142,3 +140,4 @@ resource "digitalocean_record" "thom_is_wasm" {
   type     = "CNAME"
   value    = "ecp.map.fastly.net."
 }
+
